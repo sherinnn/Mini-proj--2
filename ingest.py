@@ -8,7 +8,7 @@ import faiss
 from sentence_transformers import SentenceTransformer
 from utils import load_document, chunk_text
 
-MODEL_NAME = "all-MiniLLM-L6-v2"
+MODEL_NAME = "all-MiniLM-L6-v2"
 DOCS_DIR = "data/docs"
 INDEX_DIR = "index"
 FAISS_PATH = os.path.join(INDEX_DIR, "faiss.index")
@@ -26,7 +26,7 @@ def build_index():
             continue # if file doesnt exist in path then skip
 
         text = load_document(path)
-        chunks = chunk_text(path)
+        chunks = chunk_text(text)
 
         for i, chunk in enumerate(chunks):
             all_chunks.append(chunk)    
@@ -62,7 +62,7 @@ def build_index():
 if __name__=="__main__":
     build_index()
 
-    
+
 # Why normalize embeddings?
 
 # Cosine similarity compares vectors by angle rather than raw length. A common trick is:
